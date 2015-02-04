@@ -1,0 +1,172 @@
+<h1>CSS Level 4 Selectors to Watch Out For</h1>
+
+<p>It’s about time we started learning some new CSS, isn’t it?</p>
+
+<p>We’re all used to new features being introduced to frameworks left and right, but we often forget that new features are constantly being developed in the core web languages we use every day.</p>
+
+<h2>W3C Editor’s Draft</h2>
+
+<p>The <a href="http://dev.w3.org/csswg/selectors-4/" target="_self">CSS Selectors Level 4 draft</a> from the 15th of January outlines a major jump in features for CSS.</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/30/posts/23117/image/w3c.png"/>
+</figure>
+
+<p>Before we get started, you should know: the CSS you find in this article, today, will largely fail to work in any browser. Even the newest of the new. The reason for this is that the draft is exactly that–a draft. This is the fourth version of the level 4 selectors draft, which started back in 2011. The selectors suggested in the draft are a specification for new selectors that are being suggested by the editors of the document itself, through a lot of deliberation and collaboration with people in the community who participate in the W3C mailing list.</p>
+
+<p>So what does this mean? It means that in the relatively near future, we will likely see <a href="http://css4-selectors.com/selectors/" target="_self">a lot of these features</a> implemented, and many will be delivered in development versions of browsers like Chrome and Firefox.</p>
+
+<p>Let’s look at some of the new selectors!</p>
+
+<h2><span class="sectionnum">1.</span> :not(.warning, .alert)</h2>
+
+<p>We’ve seen the <code class="inline">:not</code> selector before in level 3 selectors. However, the current draft of the level 4 <code class="inline">:not</code> selector allows for multiple arguments with more complex matching.</p>
+
+<p>Previously, <code>:not</code> could only be used with a single selector and couldn’t be combined. For example, level 3 <code class="inline">:not</code> might look like this:</p>
+
+<pre class="brush: css">a:not([href*="somesite.com"]) {
+
+}</pre>
+
+<p>This would choose all anchor tags that didn’t have an <code class="inline">href</code> including the string <code class="inline">"somesite.com"</code>. But with the new draft, we can do more interesting things. </p>
+
+<p>We’ll cover <code class="inline">:has</code> shortly, but for now, here is a selector that selects all links that are not direct descendants of elements with a class of <code class="inline">col</code> or a class that <em>begins</em> with <code class="inline">col</code> (like Bootstrap’s grid classes <code>col-md-4</code>). It will also ignore anchors that have img elements as descendants.</p>
+
+<pre class="brush: css">a:not([class|="col"]&gt;a, :has(img)) {
+
+}</pre>
+
+<p>This selector also allows us to do things like:</p>
+
+<pre class="brush: css">div:not(div+div) {
+
+}</pre>
+
+<p>This selects all divs that are not next-in-line siblings of other divs.</p>
+
+<h3>Taking it Even Further</h3>
+
+<p>With the addition of the <code>:nth-last-child</code> pseudo-class we can also do things like this:</p>
+
+<pre class="brush: css">div:not(.container&gt;div:nth-last-child(-n+2)) {
+
+}</pre>
+
+<p>This would select all divs except those that are direct descendants of <code>.container</code> elements <em>and</em> are the last two siblings.</p>
+
+<p>As you can see, these rules can get very powerful and complex; but let’s add even more flexibility into the mix by introducing the <code>:has</code> pseudo selector.</p>
+
+<h2><span class="sectionnum">2.</span> :has(div, p, &gt; a)</h2>
+
+<p>The <code>:has</code> pseudo-selector allows you to select elements that have the passed in arguments as children. For example, to select all anchor links that have image elements as children, you would use the following syntax:</p>
+
+<pre class="brush: css">a:has(img) {
+
+}</pre>
+
+<p>However, <code>:has</code> is not limited to simple selectors. You can combine <code class="inline">:has</code> with <code class="inline">:not</code> and <code class="inline">:nth-*</code> selectors to create quite complex relational selectors.</p>
+
+<p>For example, let’s select <code class="inline">table</code> elements that have more than ten rows:</p>
+
+<pre class="brush: css">table:has(tr:nth-of-type(11)) {
+
+}</pre>
+
+<h3>Combining of :has() and :not()</h3>
+
+<p>How about selecting a <code class="inline">body</code> element whose last child element <em>isn’t</em> a footer?</p>
+
+<pre class="brush: css">body:not(:has(footer:last-child)) {
+
+}</pre>
+
+<h2><span class="sectionnum">3.</span> :any-link</h2>
+
+<p>Currently we can target hyperlinks using <code class="inline">:link</code> and <code class="inline">:visited</code>. This goes further than simply using the <code>a</code> selector, as it checks for the presence of <code class="inline">href</code>, and checks the user’s browsing history to determine if a given link has been visited.</p>
+
+<pre class="brush: css">:link, :visited {
+   color: blue;
+} </pre>
+
+<p>With proposed level 4 selectors we could style all links, visited or not, using <code class="inline">:any-link</code>. The above style is relatively equivalent to:</p>
+
+<pre class="brush: css">:any-link {
+   color: blue;
+}
+</pre>
+
+<h2><span class="sectionnum">4.</span> :scoped</h2>
+
+<p>Until level 4 selectors, CSS has been given a <em>global</em> scope. In other words, if you add the following CSS:</p>
+
+<pre class="brush: css">div {
+   color: #444;
+}
+</pre>
+
+<p>all divs will receive the <code>color: #444</code> style rule. (This assumes that no other competing styles are applied.) Level 4 selectors allow for stylesheets and style tags to be <em>scoped</em> to an element:</p>
+
+<pre class="brush: css">&lt;section&gt;
+  &lt;h2&gt;This is outside the scope.&lt;/h2&gt;
+  &lt;aside&gt;
+&lt;style scoped&gt;
+      h2 {
+        font-size: 2rem;
+      }
+    &lt;/style&gt;
+    &lt;h2&gt;This is within the scope&lt;/h2&gt;
+  &lt;/aside&gt;
+&lt;/section&gt;
+</pre>
+
+<p>In this example, we have applied a scope to a style tag inside of the <code>aside</code> element. The rules in this style tag will only apply to descendants of the <code>style</code>’s parent element.</p>
+
+<h2><span class="sectionnum">5.</span> :matches(selector1, selector2)</h2>
+
+<p>The <code class="inline">:matches</code> pseudo selector allows us to check if an element matches a list of elements. For example, if you wanted to target all anchor, paragraph, and h2 tags within an article, you could accomplish that with the following:</p>
+
+<pre class="brush: css">article :matches(h2, a, p) {
+
+}</pre>
+
+<p>This replaces the previously much more verbose syntax:</p>
+
+<pre class="brush: css">article a, article h2, article p {
+
+}</pre>
+
+<p><strong>Note</strong>: As of this version of the draft, <code class="inline">:matches()</code> may not be used with <code class="inline">:not</code>, <code class="inline">:has</code>, or another nested <code class="inline">:matches</code>.</p>
+
+<h2><span class="sectionnum">6.</span> Explicit Descender Selector <code>&gt;&gt;</code></h2>
+
+<p>You’re probably familiar with the space character allowing us to write descendant rules, such as all anchors inside a div:</p>
+
+<pre class="brush: css">div a {
+
+}</pre>
+
+<p>But until now we haven’t seen an explicit descendant selector. With level 4 selectors we have one: <code>&gt;&gt;</code>.</p>
+
+<p>However, note that this results in an unnecessary extra character in your CSS, as you can accomplish the same effect with a single character space, so be careful how you use it. Presumably it acts as a bridge between the immediate child selector, <code>&gt;</code>, and the shadow-dom access selector, <code>&gt;&gt;&gt;</code>.</p>
+
+<h2><span class="sectionnum">7.</span> Table In-Column Selector <code>||</code></h2>
+
+<p>This selector is a welcome addition for table styling. Let’s look at some markup for a basic table:</p>
+
+<pre class="brush: css">
+  &lt;table&gt; &lt;colgroup&gt; &lt;col class="id"&gt; &lt;col class="personnel-info" colspan="2"&gt; &lt;/colgroup&gt; &lt;tr&gt; &lt;th&gt;ID&lt;/th&gt; &lt;th&gt;Name&lt;/th&gt; &lt;th&gt;Email&lt;/th&gt; &lt;/tr&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;td&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;
+  <span class="c">&lt;!-- etc --&gt;</span>
+  &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;
+</pre>
+
+<p>Styling horizontally grouped elements (ie: within the same row) has historically been relatively straightforward to accomplish. Styling elements grouped <em>vertically</em> is a whole other ball game.</p>
+
+<p>In order to style all elements that are a part of the column with the class <code>personnel-info</code>, we could add more classes to the markup and style them directly, or, looking towards level 4 selectors, we could use the <code>||</code> selector. The <code>||</code> selector allows you to cleanly target those <code>td</code> elements as follows:</p>
+
+<pre class="brush: css">.personnel-info || td {
+
+}</pre>
+
+<h2>Conclusion</h2>
+
+<p>That wraps up our overview of some of the new features coming in level 4 selectors! These powerful, byte-saving new set of tools aren’t locked into place entirely, but browsers are beginning to implement them in their early, experimental forms, so be on the lookout for updates to the spec. Of course when they are formalized, we will cover them here on Tuts+!</p>

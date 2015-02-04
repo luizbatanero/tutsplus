@@ -1,0 +1,169 @@
+<h1>Six Awesome Things You Can Do with Kouto Swiss for Stylus</h1>
+
+<p><a href="http://kouto-swiss.io/" rel="external" target="_blank">Kouto Swiss</a> is a fantastic new mixin library for the CSS preprocessor <a href="http://learnboost.github.io/stylus/" rel="external" target="_blank">Stylus</a>, created by developers Pierre-Antoine Delnatte and Thierry Lagasse of <a href="https://twitter.com/krkn_be" rel="external" target="_blank">KRKN</a>. It aims to be the standard toolkit that Stylus developers turn to, and after taking a good look through its array of functionality I can say it would certainly be worthy of that role.</p>
+
+<h3>New to Stylus?</h3>
+
+<p>If you’re unfamiliar with Stylus, or CSS preprocessors, you can get an intro via my article <a href="http://webdesign.tutsplus.com/articles/why-i-choose-stylus-and-you-should-too--webdesign-18412" rel="external" target="_blank">Why I Choose Stylus (And You Should Too)</a>.</p>
+
+<p>And while you’re at it, watch the first two videos of my new course <a href="http://webdesign.tutsplus.com/courses/become-a-css-superhero-with-stylus" rel="external" target="_blank">Become a CSS Superhero with Stylus</a>. They’re both free, and will walk you through what Stylus is and how you can get yourself setup to work with it easily.</p>
+
+<h2>Installing Kouto Swiss</h2>
+
+<p>To install Kouto Swiss I recommend first installing <a href="http://nodejs.org/" rel="external" target="_blank">Node.js</a>, then running the command <code class="inline">npm install kouto-swiss</code> via a terminal or command prompt inside your project folder. I’ve found this to be the easiest way to ensure dependencies are met.</p>
+
+<p>Then add this line at the top of your Stylus file and you’re ready to go:</p>
+
+<pre class="brush: css">@import 'node_modules/kouto-swiss'</pre>
+
+<p>“Kouto Swiss” means “Swiss Army Knife”, and in the spirit of that famous little emblem of concentrated usefulness, this mixin library has crammed a whole lot of helpful things into one small package.</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/30/posts/22251/image/kouto.png"/>
+</figure>
+
+<p>There are far too many features in Kouto Swiss for us to cover them all here, so today we’re going to start by looking at a selection of six of its functions in action.</p>
+
+<h2><span class="sectionnum">1.</span> Normalize Via One Line</h2>
+
+<p>Including <a href="http://necolas.github.io/normalize.css/" rel="external" target="_blank">Normalize.css</a> in your projects is, I would suggest, a necessity.</p>
+
+<p>When you use a CSS preprocessor that typically means finding an actively maintained version of Normalize.css which has been rewritten into your language of choice, downloading it into your project, importing it, keeping an eye out for updates then reimporting it when required.</p>
+
+<p>When you’re using Kouto-Swiss on the other hand, you don't have to worry about any of those steps. Just add a single line to your Stylus file:</p>
+
+<pre class="brush: css">normalize()</pre>
+
+<p>The full code of Normalize.css will be written straight into your stylesheet:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/normalize_css.png"/>
+</figure>
+
+<p>With this approach you need only keep your Kouto-Swiss up to date and Normalize.css will be taken care of right along with it. No extra files, packages or imports to worry about; the whole process is handled via that one line of code.</p>
+
+<p>If you don’t actually like to use Normalize.css and perhaps prefer <a href="http://meyerweb.com/eric/tools/css/reset/" rel="external" target="_blank">Eric Meyer's CSS reset</a>, there’s a “one liner” you can use for that too: <code class="inline">meyer-reset()</code></p>
+
+<h2><span class="sectionnum">2.</span> “Can I Use” Vendor Prefixes &amp; Fallbacks</h2>
+
+<p>Unless you stick to older CSS properties, you’re going to have to use vendor specific prefixes and fallbacks on several occasions in order to output cross browser compatible code. However, maintaining your vendor prefixes and fallbacks can be tricky as requirements on where they should be used are always changing.</p>
+
+<p>Kouto-Swiss deftly handles this issue by communicating with the <a href="http://caniuse.com/" rel="external" target="_blank">Can I Use</a> website to keep all your vendor prefixes and fallbacks up to date for you. You can add your own settings as to which browsers and versions you want to support, or just go with the defaults coming from the “Can I Use” recommendations.</p>
+
+<p>There are no special steps to have your code automatically made cross browser compatible. Just write your Stylus code as though all its properties were already universally supported:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/vendor_styl.png"/>
+</figure>
+
+<p>The resulting CSS will have the correct vendor prefixes and fallback code in place:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/vendor_css.png"/>
+</figure>
+
+<p>Check out <a href="http://kouto-swiss.io/docs.html#vendors" target="_self">the full list of CSS properties supported</a> by the vendor prefixing and fallback functionality.</p>
+
+<h2><span class="sectionnum">3.</span> Instant CSS3 Triangles</h2>
+
+<p>The relatively new ability to generate shapes with CSS3 has been super useful for adding icons and basic illustrations to sites in a way that loads fast, is easy to color and can be scaled via code edits alone.</p>
+
+<p>CSS3 triangles are one of the shapes that can be created, yet trying to write the code to output them with the size, color and angle you want can be tricky.</p>
+
+<p>Kouto-Swiss includes an incredibly easy to use <code class="inline">triangle()</code> mixin that takes all the trial and error out of triangle generation, as you simply tell it which direction you want the triangle to point, how big it should be, and what its foreground and (optional) background colors should be.</p>
+
+<p>For example, drop a few <code class="inline">triangle()</code> mixins with some predefined color variables like so:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/tri_styl.png"/>
+</figure>
+
+<p>Then your CSS triangle creation becomes a walk in the park:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/tri_out.png"/>
+</figure>
+
+<h2><span class="sectionnum">4.</span> Font Stacks</h2>
+
+<p>It’s always good practice to include a <i>font stack</i> against every font-family declaration in your stylesheet so if your preferred font is missing, for whatever reason, you have some alternatives in place. That said, figuring out which fonts are sufficiently similar to one another to form a good stack can be a little laborious and difficult.</p>
+
+<p>Kouto-Swiss includes a <code class="inline">font-stack()</code> mixin that gets its font stack information from  <a href="http://cssfontstack.com/">cssfontstack.com</a>, by <a href="http://denisleblanc.com/">Denis Leblanc</a>, and lets you easily output font stacks based on popular font families.</p>
+
+<p>For example, the following Stylus code:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/fontstack_styl.png"/>
+</figure>
+
+<p>generates these complete font stacks:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/fontstack_css.png"/>
+</figure>
+
+<p>Take a look at the <a href="http://kouto-swiss.io/docs.html#font-stack" target="_self">full list of fonts</a> covered by this mixin.</p>
+
+<h2><span class="sectionnum">5.</span> Automated Color Scheme Generation</h2>
+
+<p>Kouto Swiss has functions to create five different types of color schemes:</p>
+
+<ul>
+  <li>Analogous</li>
+  <li>Monochrome</li>
+  <li>Split Compliments</li>
+  <li>Triad</li>
+  <li>Quad</li>
+</ul>
+
+<p>You feed the color scheme generating function a <i>seed</i> color and store the information returned against a Stylus variable.  Between two to four colors will be returned, which you can then output in the following way:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/colorgen_one.png"/>
+</figure>
+
+<p>In the code above I have used a blue color of <code class="inline">#3083bf</code> and passed it through each of the five color scheme generation functions, which has then generated these color schemes:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/colors_one.png"/>
+</figure>
+
+<p>If the seed color is then changed, a whole new set of color schemes can be generated from the same set of code. For example, changing to <code class="inline">#30bfb3</code> gives you:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/colors_two.png"/>
+</figure>
+
+<p>You can read about exactly what each of the color scheme generation functions does <a href="http://kouto-swiss.io/docs.html#analogous" target="_self">in the documentation</a>.</p>
+
+<h2><span class="sectionnum">6.</span> Pure CSS Keyframe Animation</h2>
+
+<p>CSS animation, much like CSS shapes, is one of the most useful new tools in our web design arsenal. Elements that previously would have needed Flash or JavaScript can now be brought to life with nothing but pure CSS.</p>
+
+<p>At the moment though, cross browser CSS animation code needs a <i>lot</i> of vendor prefixes. By using Kouto Swiss <code class="inline">@keyframe</code> functionality combined with the vendor prefixing we described above it becomes pretty straight forward to code up your animations. For example, these 29 lines of Stylus:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/keyframes.png"/>
+</figure>
+
+<p>output the required 232 lines of CSS, which I think you'll agree would be a nightmare to write manually:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/keyframe_css.png"/>
+</figure>
+
+<p>The resulting animation looks like this:</p>
+
+<figure class="post_image">
+  <img alt="" src="https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/53/posts/22251/image/cssanim.gif"/>
+</figure>
+
+<p>Again, <a href="http://kouto-swiss.io/docs.html#keyframes" target="_self">check out the docs</a> to read more about <code class="inline">@keyframe</code> animation in Kouto Swiss.</p>
+
+<h2>Wrapping Up</h2>
+
+<p>Kouto Swiss is an excellent addition to the world of CSS development and I highly recommend taking it out for a test drive. </p>
+
+<p>It has a long list of extra features that we haven't even touched on so head over to <a href="http://kouto-swiss.io/" target="_self">http://kouto-swiss.io</a> to get the full rundown.</p>
+
+<p>And remember, if you need a little help kicking off your Stylus development, watch the two free videos from my course to learn how to get started: <a href="http://webdesign.tutsplus.com/courses/become-a-css-superhero-with-stylus" rel="external" target="_blank">Become a CSS Superhero with Stylus</a>.</p>
